@@ -57,7 +57,11 @@ object LunaSettingsLoader
             var CSV: JSONArray? = null
 
             try {
-                CSV = Global.getSettings().loadCSV("data/config/LunaSettings.csv", mod.id)
+                CSV = synchronized(Global.getSettings().modManager) {
+                    synchronized(com.fs.util.C.Ó00000()) {
+                        Global.getSettings().loadCSV("data/config/LunaSettings.csv", mod.id)
+                    }
+                }
             } catch (e: Throwable) {}
             if (CSV == null) continue
 
