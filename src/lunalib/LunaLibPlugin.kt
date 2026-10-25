@@ -4,6 +4,7 @@ import com.fs.starfarer.api.BaseModPlugin
 import com.fs.starfarer.api.Global
 import com.fs.starfarer.api.impl.codex.CodexDataV2
 import com.fs.starfarer.api.impl.codex.CodexEntryV2
+import lunalib.backend.scripts.DevmodeKeyListener
 import lunalib.backend.scripts.KeybindsScript
 import lunalib.backend.scripts.LoadedSettings
 import lunalib.backend.ui.refit.RefitButtonAdder
@@ -44,6 +45,8 @@ class LunaLibPlugin : BaseModPlugin()
         Global.getSector().addTransientScript(LunaTitleRecordingScipt())
         Global.getSector().addTransientScript(RefitButtonAdder())
         Global.getSector().addTransientScript(KeybindsScript())
+
+        Global.getSector().listenerManager.addListener(DevmodeKeyListener(), true)
 
         var script = LunaCampaignRenderer.getScript()
         if (!Global.getSector().hasScript(script::class.java)) {

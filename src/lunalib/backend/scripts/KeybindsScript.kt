@@ -35,13 +35,6 @@ class KeybindsScript : EveryFrameScript
         if (interval.intervalElapsed())  keyPressed = false
         if (keyPressed) return
 
-        if (Keyboard.isKeyDown(LoadedSettings.devmodeKeybind!!) && !Keyboard.isKeyDown(Keyboard.KEY_NONE))
-        {
-            Global.getSettings().isDevMode = !Global.getSettings().isDevMode
-            DebugFlags.setStandardConfig()
-            keyPressed = true
-        }
-
         if (Keyboard.isKeyDown(LoadedSettings.settingsKeybind!!)) openSettings()
         else if (Keyboard.isKeyDown(Keyboard.KEY_F2) && Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) openSettings()
         else if (Keyboard.isKeyDown(LoadedSettings.debugKeybind!!)) openDebug()
