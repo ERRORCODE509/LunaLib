@@ -41,11 +41,6 @@ object LunaSettingsLoader
         log.level = Level.ALL
     }
 
-    //The resource loader's own lock, held while loading so no other lookup can run between loadCSV's two calls.
-    //Its class and getter are obfuscated and renamed per build and platform, so they are found at runtime:
-    //a failed lookup is thrown from inside the loader, and the loader is the first class below the SettingsAPI
-    //implementation in that stack trace that has a static getter returning its own type.
-    //Null if it can't be found, in which case loading runs without it, as before.
     private val resourceLoaderLock: Any? by lazy {
         try {
             val settingsClass = Global.getSettings().javaClass.name

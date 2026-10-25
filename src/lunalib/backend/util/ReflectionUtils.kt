@@ -216,12 +216,10 @@ internal object ReflectionUtils {
         }
     }
 
-    //Returns the instance from a class's static, parameterless getInstance-style method, found by its shape so it works with obfuscated names.
-    //Returns null unless exactly one such method exists.
     fun getStaticSingleton(clazz: Class<*>): Any? {
         val instancesOfMethods: Array<out Any> = clazz.declaredMethods as Array<out Any>
         val candidates = instancesOfMethods.filter { method ->
-            (getMethodModifiersHandle.invoke(method) as Int) and 0x0008 != 0 //Modifier.STATIC
+            (getMethodModifiersHandle.invoke(method) as Int) and 0x0008 != 0
                     && (getMethodParametersHandle.invoke(method) as Array<*>).isEmpty()
                     && getMethodReturnTypeHandle.invoke(method) == clazz
         }
